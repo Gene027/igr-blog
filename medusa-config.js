@@ -52,6 +52,12 @@ const plugins = [
       },
     },
   },
+  {
+    resolve: `medusa-blog`,
+    options: {
+      enableUI: true,
+    },
+  },
 ];
 
 const modules = {
