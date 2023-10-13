@@ -2,6 +2,7 @@ import { FindConfig, Selector, TransactionBaseService, buildQuery } from "@medus
 import { BlogRepository } from "../repositories/blog";
 import { MedusaError } from "@medusajs/utils"
 import { Blog } from "src/models/blog.entity";
+import { BlogDto } from "src/interfaces/blog.interface";
 
 class BlogService extends TransactionBaseService {
     protected blogRepository_: typeof BlogRepository
@@ -12,7 +13,7 @@ class BlogService extends TransactionBaseService {
     }
 
     async createPost(
-        data: any
+        data: BlogDto
     ): Promise<Blog> {
         return this.atomicPhase_(async (manager) => {
             const postRepo = manager.withRepository(
@@ -68,7 +69,7 @@ class BlogService extends TransactionBaseService {
     }
 
 
-    async updatePost(id: string, data: any) {
+    async updatePost(id: string, data: BlogDto) {
         return await this.atomicPhase_(async (manager) => {
             const postRepo = manager.withRepository(
                 this.blogRepository_

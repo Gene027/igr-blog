@@ -4,6 +4,7 @@ import { Blog } from "src/models/blog.entity";
 import cors from "cors";
 import { ConfigModule, authenticate, wrapHandler } from "@medusajs/medusa"
 import BlogService from "src/services/blog";
+import { BlogDto } from "src/interfaces/blog.interface";
 
 
 export default function blogRoutes(router: Router, options: ConfigModule) {
@@ -34,7 +35,12 @@ export default function blogRoutes(router: Router, options: ConfigModule) {
         throw new Error("`title` and `content` are required.")
       }
 
-      const post = await blogService.createPost(req.body)
+      const data: BlogDto = {
+        title: req.body.title,
+        content: req.body.content
+      }
+
+      const post = await blogService.createPost(data)
 
       res.json({
         post,
@@ -67,10 +73,19 @@ export default function blogRoutes(router: Router, options: ConfigModule) {
       if (req.body.id) {
         throw new Error("Can't update post ID")
       }
+      
+      if (!req.body.title || !req.body.content) {
+        throw new Error("`title` and `content` are required.")
+      }
+
+      const data: BlogDto = {
+        title: req.body.title,
+        content: req.body.content
+      }
 
       const post = await blogService.updatePost(
         req.params.id,
-        req.body
+        data
       )
 
       res.json({
