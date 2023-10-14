@@ -52,12 +52,12 @@ const plugins = [
       },
     },
   },
-  {
-    resolve: `medusa-blogtest`,
-    options: {
-      enableUI: true,
-    },
-  },
+  // {
+  //   resolve: `medusa-blogtest`,
+  //   options: {
+  //     enableUI: true,
+  //   },
+  // },
 ];
 
 const modules = {

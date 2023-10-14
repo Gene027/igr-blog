@@ -13,41 +13,25 @@
     "medusa"
   ],
   "scripts": {
-    "clean": "cross-env ./node_modules/.bin/rimraf dist",
-    "build": "cross-env npm run clean && npm run build:server && npm run build:admin",
-    "build:server": "cross-env npm run clean && tsc -p tsconfig.server.json",
-    "build:admin": "cross-env medusa-admin build",
-    "watch": "cross-env tsc --watch",
-    "test": "cross-env jest",
-    "seed": "cross-env medusa seed -f ./data/seed.json",
-    "start": "cross-env npm run build && medusa start",
-    "start:custom": "cross-env npm run build && node --preserve-symlinks --trace-warnings index.js",
-    "dev": "cross-env npm run build:server && medusa develop",
-    "prepare": "cross-env NODE_ENV=production npm run build:server && medusa-admin bundle"
+    "build": "cross-env npm run clean && tsc -p tsconfig.server.json",
+    "build:tsc": "tsc -b",
+    "clean": "rimraf api handlers utils types coverage tsconfig.tsbuildinfo",
+    "test": "jest --forceExit",
+    "test:ci": "yarn add -D @medusajs/medusa@${MEDUSAJS_VERSION} && yarn run test"
   },
   "dependencies": {
-    "@medusajs/admin": "^7.1.4",
-    "@medusajs/cache-redis": "^1.8.8",
-    "@medusajs/event-bus-local": "^1.9.6",
-    "@medusajs/event-bus-redis": "^1.8.9",
-    "@medusajs/file-local": "^1.0.2",
-    "@medusajs/medusa": "^1.17.1",
-    "@tanstack/react-query": "4.22.0",
-    "babel-preset-medusa-package": "^1.1.13",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "16.0.3",
     "express": "^4.17.2",
     "medusa-interfaces": "^1.3.7",
-    "prism-react-renderer": "^2.0.4",
     "typeorm": "^0.3.16"
   },
   "peerDependencies": {
-    "@medusajs/medusa": "^1.16.0",
-    "react": "^18.2.0",
-    "react-router-dom": "^6.13.0"
+    "@medusajs/medusa": "^1.9.0"
   },
   "devDependencies": {
+    "@medusajs/medusa": "^1.9.0",
     "@babel/cli": "^7.14.3",
     "@babel/core": "^7.14.3",
     "@babel/preset-typescript": "^7.21.4",
