@@ -43,7 +43,7 @@
     "typeorm": "^0.3.16"
   },
   "peerDependencies": {
-    "@medusajs/medusa": "^1.17.1",
+    "@medusajs/medusa": "^1.16.0",
     "react": "^18.2.0",
     "react-router-dom": "^6.13.0"
   },
