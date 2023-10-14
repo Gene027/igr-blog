@@ -53,7 +53,7 @@ const plugins = [
     },
   },
   {
-    resolve: `medusa-blog`,
+    resolve: `medusa-blogtest`,
     options: {
       enableUI: true,
     },
