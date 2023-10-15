@@ -3,13 +3,19 @@ import { BlogRepository } from "../repositories/blog";
 import { MedusaError } from "@medusajs/utils"
 import { Blog } from "src/models/blog";
 import { BlogDto } from "src/types/blog.interface";
+import { EntityManager } from "typeorm";
+
+type InjectedDependencies = {
+    manager: EntityManager;
+    blogRepository: typeof BlogRepository;
+};
 
 class BlogService extends TransactionBaseService {
     protected blogRepository_: typeof BlogRepository
 
-    constructor(container) {
-        super(container)
-        this.blogRepository_ = container.postRepository
+    constructor({ blogRepository }: InjectedDependencies) {
+        super(arguments[0]);
+        this.blogRepository_ = blogRepository
     }
 
     async createPost(

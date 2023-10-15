@@ -1,7 +1,7 @@
 import {
     dataSource,
 } from "@medusajs/medusa/dist/loaders/database"
-import { Blog } from "src/models/blog"
+import { Blog } from "../models/blog"
 
 
 export const BlogRepository = dataSource

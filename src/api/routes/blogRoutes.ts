@@ -1,12 +1,9 @@
 import { Router } from "express";
-import { EntityManager } from "typeorm";
-import { Blog } from "src/models/blog";
 import cors from "cors";
 import { ConfigModule, authenticate, wrapHandler } from "@medusajs/medusa"
 import BlogService from "src/services/blog";
 import bodyParser from "body-parser";
 import { BlogDto } from "src/types/blog.interface";
-
 
 export default function blogRoutes(router: Router, options: ConfigModule) {
   const { projectConfig } = options
