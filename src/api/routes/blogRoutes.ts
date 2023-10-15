@@ -18,7 +18,7 @@ export default function blogRoutes(router: Router, options: ConfigModule) {
   router.use("/admin/blog", blogRouter, bodyParser.json())
 
   blogRouter.use(cors(corsOptions))
-  // blogRouter.use(authenticate())
+  blogRouter.use(authenticate())
 
   // Create a new blog post
   blogRouter.post(
