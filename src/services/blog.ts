@@ -34,18 +34,19 @@ class BlogService extends TransactionBaseService {
         })
     }
 
-    async listAllPosts(selector?: Selector<Blog>,
-        config: FindConfig<Blog> = {
-            skip: 0,
-            take: 20,
-            relations: [],
-        }) {
+    async listAndCount(): Promise<[Blog[], number]> {
+        const postRepo = this.activeManager_.withRepository(this.blogRepository_);
+      
+        const posts = await postRepo.findAndCount();
+      
+        return posts;
+      }
+    async listAllPosts() {
         const postRepo = this.activeManager_.withRepository(
             this.blogRepository_
         )
 
-        const query = buildQuery(selector, config)
-        const [posts] = await postRepo.findAndCount(query)
+        const [posts] = await this.listAndCount();
 
         return posts
     }

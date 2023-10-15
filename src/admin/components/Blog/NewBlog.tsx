@@ -1,5 +1,5 @@
 import { FC, useState} from 'react'
-import { BlogPost } from '../../widgets/blog/blog';
+import { BlogPost, BlogPostRes } from '../../widgets/blog/blog';
 import { useAdminCustomPost } from "medusa-react"
 
 interface NewBlogProps {
@@ -23,7 +23,7 @@ const NewBlog: FC<NewBlogProps> = ({ onClose }) => {
     }
     const { mutate, isLoading } = useAdminCustomPost<
     BlogPost,
-    BlogPost
+    BlogPostRes
   >(
     `/blog/posts`,
     ["blog-posts"]
@@ -40,8 +40,8 @@ const NewBlog: FC<NewBlogProps> = ({ onClose }) => {
     return <div>
         <div onClick={() => onClose(false)}>overlay</div>
         <div>
-            <input type="text" name='title' onChange={handleChange} value={formData.title}/>
-            <input type="text" name='content' onChange={handleChange} value={formData.content}/>
+            <input type="text" name='title' onChange={handleChange} value={formData.title} placeholder='title'/>
+            <input type="text" name='content' onChange={handleChange} value={formData.content} placeholder='content'/>
             <button onClick={()=>handleSubmit(formData)}>Submit</button>
         </div>
     </div>

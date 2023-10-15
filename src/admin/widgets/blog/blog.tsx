@@ -10,14 +10,23 @@ interface BlogProps {
 
 export type BlogPost = {
     title: string,
-    content: string,
-    id?: string
+    content: string
+}
+
+export type BlogPostRes = {
+    posts: {
+        title: string,
+        content: string,
+        id: string,
+        created_at: string,
+        updated_at: string,
+    }[]
 }
 
 const Blog: FC<BlogProps> = ({ }) => {
     const { data, isLoading } = useAdminCustomQuery<
         BlogPost,
-        BlogPost[]
+        BlogPostRes
     >(
         `/blog/posts/`,
         ["blog-post"],
@@ -25,15 +34,18 @@ const Blog: FC<BlogProps> = ({ }) => {
     const [newBlogOpen, setNewBlogOpen] = useState(false);
 
     return <div>
-        <button onClick={()=> setNewBlogOpen(true)}>Create New Blog</button>
+        <button className='bg-green-600 text-white p-2' onClick={() => setNewBlogOpen(true)}>Create New Blog</button>
 
         {isLoading && <span>Loading ...</span>}
 
-        {newBlogOpen && <NewBlog onClose={setNewBlogOpen}/>}
+        {newBlogOpen && <NewBlog onClose={setNewBlogOpen} />}
 
-        {data && <div>
-                {data.map((blog, index) => (<BlogCard key={index} blog={blog} id={blog.id}/>))}
+        {data && data.posts.map((post, index) => (
+            <div key={post.id} className='mt-4'>
+                <span>Post{index + 1}</span>
+                <BlogCard  blog={post} id={post.id} />
             </div>
+        ))
         }
     </div>
 

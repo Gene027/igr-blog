@@ -26,7 +26,7 @@ const BlogCard: FC<BlogCardProps> = ({blog, id}) => {
   return <div>
     <div>{blog.title}</div>
     <div>{blog.content}</div>
-    <button onClick={handleDelete}>Delete</button>
+    <button className='bg-red-800 text-white p-2 rounded-full' onClick={handleDelete}>Delete</button>
     {isLoading && <span>deleting ...</span>}
   </div>
 }
