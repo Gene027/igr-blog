@@ -1,17 +1,18 @@
 import { FC, useState } from 'react'
-import { BlogPost, BlogPostRes } from '../../routes/blog/page';
+import { Blog, BlogPost, BlogPostRes } from '../../routes/blog/page';
 import { useAdminCustomPost } from "medusa-react"
 import { AiOutlineClose } from 'react-icons/ai'
 
 interface NewBlogProps {
     toast: any;
     handleClose?: () => void;
+    blog: Blog
 }
 
-const NewBlog: FC<NewBlogProps> = ({ toast, handleClose }) => {
+const EditBlog: FC<NewBlogProps> = ({ toast, handleClose, blog }) => {
     const initialForm: BlogPost = {
-        title: '',
-        content: ''
+        title: blog.title,
+        content: blog.content
     }
     const [formData, setFormdata] = useState(initialForm)
 
@@ -27,14 +28,14 @@ const NewBlog: FC<NewBlogProps> = ({ toast, handleClose }) => {
         BlogPost,
         BlogPostRes
     >(
-        `/blog/posts`,
-        ["blog-posts"]
+        `/blog/posts/${blog.id}`,
+        ["blog-posts-id"]
     )
 
     const handleSubmit = (data: BlogPost) => {
         return mutate(data, {
             onSuccess: (data) => {
-                toast.success("Success", `Post ${formData.title} created successfully`);
+                toast.success("Success", `Post ${formData.title} was updated successfully`);
                 setTimeout(() => {
                     window.location.reload();
                 }, 2000);
@@ -63,11 +64,11 @@ const NewBlog: FC<NewBlogProps> = ({ toast, handleClose }) => {
              
 
                 <button className='flex py-[6px] px-3 items-center w-fit rounded-lg border border-solid border-[#E5E7EB] bg-white disabled:bg-[#9CA3AF] text-[#111827] text-sm font-medium' onClick={() => handleSubmit(formData)}
-                disabled={!formData.content || !formData.title}>Submit</button>
+                disabled={!formData.content || !formData.title}>Save and close</button>
             </div>
         </div>
     )
 
 }
 
-export default NewBlog
+export default EditBlog
