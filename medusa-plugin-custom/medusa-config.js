@@ -19,7 +19,7 @@ switch (process.env.NODE_ENV) {
 
 try {
   dotenv.config({ path: process.cwd() + "/" + ENV_FILE_NAME });
-} catch (e) { }
+} catch (e) {}
 
 // CORS when consuming Medusa from admin
 const ADMIN_CORS =
@@ -34,30 +34,24 @@ const DATABASE_URL =
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
 const plugins = [
-  `medusa-fulfillment-manual`,
-  `medusa-payment-manual`,
-  {
-    resolve: `@medusajs/file-local`,
-    options: {
-      upload_dir: "uploads",
-    },
-  },
-  {
-    resolve: "@medusajs/admin",
-    /** @type {import('@medusajs/admin').PluginOptions} */
-    options: {
-      autoRebuild: true,
-      develop: {
-        open: process.env.OPEN_BROWSER !== "false",
-      },
-    },
-  },
-  {
-    resolve: `medusa-plugin-custom`,
-    options: {
-      enableUI: true,
-    },
-  },
+  // `medusa-fulfillment-manual`,
+  // `medusa-payment-manual`,
+  // {
+  //   resolve: `@medusajs/file-local`,
+  //   options: {
+  //     upload_dir: "uploads",
+  //   },
+  // },
+  // {
+  //   resolve: "@medusajs/admin",
+  //   /** @type {import('@medusajs/admin').PluginOptions} */
+  //   options: {
+  //     autoRebuild: true,
+  //     develop: {
+  //       open: process.env.OPEN_BROWSER !== "false",
+  //     },
+  //   },
+  // },
 ];
 
 const modules = {
