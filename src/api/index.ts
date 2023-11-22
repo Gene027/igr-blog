@@ -5,6 +5,8 @@ import { authenticate, ConfigModule } from "@medusajs/medusa";
 import { getConfigFile } from "medusa-core-utils";
 import { attachStoreRoutes } from "./routes/store";
 import { attachAdminRoutes } from "./routes/admin";
+import blogRoutes from "./routes/blogRoutes";
+import { errorHandler } from "@medusajs/medusa"
 
 export default (rootDirectory: string): Router | Router[] => {
   // Read currently-loaded medusa config
@@ -31,6 +33,7 @@ export default (rootDirectory: string): Router | Router[] => {
   // Set up root routes for store and admin endpoints, with appropriate CORS settings
   router.use("/store", cors(storeCorsOptions), bodyParser.json());
   router.use("/admin", cors(adminCorsOptions), bodyParser.json());
+  blogRoutes(router, configModule);
 
   // Add authentication to all admin routes *except* auth and account invite ones
   router.use(
