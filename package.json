@@ -45,7 +45,7 @@
     "medusa-payment-manual": "^1.0.24",
     "medusa-payment-stripe": "^6.0.4",
     "prism-react-renderer": "^2.0.4",
-    "react-icons": "^4.11.0",
+    "react-icons": "^5.0.0",
     "typeorm": "^0.3.16"
   },
   "devDependencies": {
